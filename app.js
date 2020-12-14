@@ -8,19 +8,22 @@ const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
 
 for(let i = 0; i < conns; i++) {
-  const client = mqtt.connect('mqtt://guest:guest@localhost')
+  const client = mqtt.connect('mqtt://guest:guest@localhost', { clean: false, clientId: 'device' + i })
 
   client.on('connect', function () {
-    client.subscribe('presence', function (err) {
+    client.subscribe('q' + i, { qos: 2 }, function (err) {
       if (!err) {
-        client.publish('presence', 'Hello mqtt')
+        client.publish('stats', 'Hello mqtt')
       }
     })
+
+    setInterval(() => {
+      client.publish('stats', 'Hello from ' + i)
+    }, 30000);
   })
 
   client.on('message', function (topic, message) {
     // message is Buffer
     console.log(message.toString())
-    client.end()
   })
 }
