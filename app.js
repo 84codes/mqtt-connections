@@ -7,13 +7,14 @@ if (process.argv.length != 4) {
 }
 const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
-const hostname = fs.readFileSync('/etc/hostname').toString().trim()
+const hostname = fs.existsSync('/etc/hostname') ? fs.readFileSync('/etc/hostname').toString().trim() : Math.random().toString(36).substring(7)
 
 for(let i = 0; i < conns; i++) {
   const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: 1000 })
+  const topic = `${hostname}_${i.toString()}`
 
   client.on('connect', function () {
-    client.subscribe(hostname + i.toString(), { qos: 1 }, function (err) {
+    client.subscribe([topic], { qos: 1 }, function (err) {
       if (!err) {
         client.publish('stats', 'Hello mqtt')
       }
@@ -36,6 +37,6 @@ for(let i = 0; i < conns; i++) {
 
   client.on('message', function (topic, message) {
     // message is Buffer
-    console.log(message.toString())
+    console.log('MSG: ', message.toString())
   })
 }
