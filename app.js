@@ -27,12 +27,10 @@ for(let i = 0; i < conns; i++) {
   })
 
   client.on('error', function(err) {
-    console.log('ERROR: ' + err.toString())
     client.end();
   });
 
   client.on('offline', function() {
-    console.log('Offline')
     client.end();
   });
 
