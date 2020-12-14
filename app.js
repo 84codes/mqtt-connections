@@ -8,7 +8,7 @@ const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
 
 for(let i = 0; i < conns; i++) {
-  const client = mqtt.connect('mqtt://guest:guest@localhost', { clean: false, clientId: 'device' + i })
+  const client = mqtt.connect(uri, { clean: false, clientId: 'device' + i })
 
   client.on('connect', function () {
     client.subscribe('q' + i, { qos: 2 }, function (err) {
@@ -21,6 +21,16 @@ for(let i = 0; i < conns; i++) {
       client.publish('stats', 'Hello from ' + i)
     }, 30000);
   })
+
+  client.on('error', function(err) {
+    console.log('ERROR: ' + err.toString())
+    client.end();
+  });
+
+  client.on('offline', function() {
+    console.log('Offline')
+    client.end();
+  });
 
   client.on('message', function (topic, message) {
     // message is Buffer
