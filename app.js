@@ -11,7 +11,7 @@ for(let i = 0; i < conns; i++) {
   const client = mqtt.connect(uri, { clean: false, clientId: 'device' + i })
 
   client.on('connect', function () {
-    client.subscribe('q' + i, { qos: 2 }, function (err) {
+    client.subscribe(process.env.HOSTNAME + i, { qos: 2 }, function (err) {
       if (!err) {
         client.publish('stats', 'Hello mqtt')
       }
