@@ -10,7 +10,7 @@ const conns = parseInt(process.argv[3])
 const hostname = fs.readFileSync('/etc/hostname').toString().trim()
 
 for(let i = 0; i < conns; i++) {
-  const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString() })
+  const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: 1000 })
 
   client.on('connect', function () {
     client.subscribe(hostname + i.toString(), { qos: 1 }, function (err) {
