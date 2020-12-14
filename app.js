@@ -19,10 +19,11 @@ for(let i = 0; i < conns; i++) {
         client.publish('stats', 'Hello mqtt')
       }
     })
-
-    setInterval(() => {
-      client.publish('stats', 'Hello from ' + i)
-    }, 30000);
+    setTimeout(() => {
+      setInterval(() => {
+        client.publish('stats', 'Hello from ' + i)
+      }, 30000);
+    }, Math.floor(Math.random() * 30000))
   })
 
   client.on('error', function(err) {
