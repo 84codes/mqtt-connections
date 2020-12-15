@@ -1,5 +1,6 @@
 const mqtt = require('mqtt')
 const fs = require('fs')
+const os = require('os')
 
 if (process.argv.length != 4) {
   console.log("Usage: node app.js URI CONNECTIONS")
@@ -7,7 +8,7 @@ if (process.argv.length != 4) {
 }
 const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
-const hostname = fs.existsSync('/etc/hostname') ? fs.readFileSync('/etc/hostname').toString().trim() : Math.random().toString(36).substring(7)
+const hostname = os.hostname()
 
 for(let i = 0; i < conns; i++) {
   const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: 1000 })
