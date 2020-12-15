@@ -10,8 +10,8 @@ const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
 const hostname = os.hostname()
 
-for(let i = 0; i < conns; i++) {
-  const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: 1000 })
+function start(i) {
+  const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: 0, rejectUnauthorized: false })
   const topic = `${hostname}_${i.toString()}`
 
   client.on('connect', function () {
