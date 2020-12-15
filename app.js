@@ -11,7 +11,7 @@ const conns = parseInt(process.argv[3])
 const hostname = os.hostname()
 
 function start(i) {
-  const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: 0, rejectUnauthorized: false })
+  const client = mqtt.connect(uri, { clean: false, clientId: hostname + i.toString(), reconnectPeriod: i, rejectUnauthorized: false })
   const topic = `${hostname}_${i.toString()}`
 
   client.on('connect', function () {
@@ -47,6 +47,5 @@ function start(i) {
 }
 
 for(let i = 0; i < conns; i++) {
-  //setTimeout(start, i * 10, i)
   start(i)
 }
