@@ -15,28 +15,38 @@ function start(i) {
   const topic = `${hostname}_${i.toString()}`
 
   client.on('connect', function () {
+    console.log('Connected')
     client.subscribe([topic], { qos: 1 }, function (err) {
-      if (!err) {
-        client.publish('stats', 'Hello mqtt')
+      if (err) {
+        console.log('Could not subscribe: ', err)
       }
     })
-    setTimeout(() => {
-      setInterval(() => {
-        client.publish('stats', 'Hello from ' + i)
-      }, 30000);
-    }, Math.floor(Math.random() * 30000))
   })
 
   client.on('error', function(err) {
+    console.log('ERROR: ', err)
     client.end();
   });
 
   client.on('offline', function() {
-    client.end();
+    //client.end();
+    console.log('Offline')
   });
 
+  client.on('close', function() {
+    console.log('Close')
+  })
+
+  client.on('reconnect', function() {
+    console.log('Reconnect')
+  })
+
   client.on('message', function (topic, message) {
-    // message is Buffer
     console.log('MSG: ', message.toString())
   })
+}
+
+for(let i = 0; i < conns; i++) {
+  //setTimeout(start, i * 10, i)
+  start(i)
 }
