@@ -7,4 +7,5 @@ cd mqtt-connections/
 sudo apt install npm
 npm install mqtt --save
 ulimit -n 100000
-node app.js $M 10000```
+node app.js $M 10000
+```
