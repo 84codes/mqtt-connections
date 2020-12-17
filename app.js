@@ -2,23 +2,23 @@ const mqtt = require('mqtt')
 const fs = require('fs')
 const os = require('os')
 
-if (process.argv.length != 4) {
-  console.log("Usage: node app.js URI CONNECTIONS")
+if (process.argv.length < 4) {
+  console.log("Usage: node app.js URI CONNECTIONS [PREFIX (defaults to HOSTNAME)]")
   process.exit()
 }
 const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
-const hostname = os.hostname()
+const prefix = process.argv[4] || os.hostname()
 
 function start(i) {
   const client = mqtt.connect(uri, {
     clean: false,
-    clientId: hostname + i.toString(),
+    clientId: prefix + i.toString(),
     connectTimeout: 60000,
     reconnectPeriod: i,
     rejectUnauthorized: false
   })
-  const topic = `${hostname}_${i.toString()}`
+  const topic = `${prefix}_${i.toString()}`
 
   client.on('connect', function () {
     console.log('Connected')
