@@ -1,9 +1,7 @@
-
 const mqtt = require('mqtt')
-const fs = require('fs')
 
 if (process.argv.length != 4) {
-  console.log("Usage: node app.js URI INTERVAL")
+  console.log("Usage: node churn.js URI INTERVAL")
   process.exit()
 }
 const uri = process.argv[2]
