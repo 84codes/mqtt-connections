@@ -15,7 +15,8 @@ function start(i) {
     clean: false,
     clientId: prefix + i.toString(),
     connectTimeout: 60000,
-    reconnectPeriod: i,
+    keepalive: 0,
+    reconnectPeriod: 30000,
     rejectUnauthorized: false
   })
   const topic = `${prefix}_${i.toString()}`
