@@ -28,6 +28,9 @@ function start(i) {
         console.log('Could not subscribe: ', err)
       }
     })
+    setInterval(() => {
+      client.publish('stats', 'Hello from ' + i)
+    }, 30000)
   })
 
   client.on('error', function(err) {
