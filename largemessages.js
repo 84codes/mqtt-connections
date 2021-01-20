@@ -32,7 +32,7 @@ function start(i) {
     })
     setInterval(() => {
       client.publish('stats', messageStr + i)
-    }, 20)
+    }, 2000)
   })
 
   client.on('error', function(err) {
