@@ -1,0 +1,25 @@
+{
+  "name": "mqtt-connections",
+  "version": "1.0.0",
+  "description": "Quick and easy way to run on Ubuntu: ```M=mqtts://username:passwd@server-name.rmq.cloudamqp.com/ git clone https://github.com/84codes/mqtt-connections.git cd mqtt-connections/ sudo apt install npm npm install mqtt --save ulimit -n 100000 node app.js $M 10000 ```",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/84codes/mqtt-connections.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/84codes/mqtt-connections/issues"
+  },
+  "homepage": "https://github.com/84codes/mqtt-connections#readme",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "fs": "^0.0.1-security",
+    "mqtt": "^4.3.7",
+    "os": "^0.1.2"
+  }
+}
