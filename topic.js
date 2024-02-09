@@ -8,9 +8,9 @@ if (process.argv.length < 6) {
 }
 const uri = process.argv[2]
 const conns = parseInt(process.argv[3])
-const prefix = process.argv[6] || os.hostname()
 const qos = parseInt(process.argv[4])
 const clean = parseInt(process.argv[5])
+const prefix = process.argv[6] || os.hostname()
 
 function start(i) {
   const client = mqtt.connect(uri, {
