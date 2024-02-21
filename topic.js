@@ -3,7 +3,7 @@ const fs = require('fs')
 const os = require('os')
 
 if (process.argv.length < 6) {
-  console.log("Usage: node app.js URI CONNECTIONS QOS (0 or 1) CLEAN (true or false) [PREFIX (defaults to HOSTNAME)]")
+  console.log("Usage: node topic.js URI CONNECTIONS QOS (0 or 1) CLEAN (true or false) [PREFIX (defaults to HOSTNAME)]")
   process.exit()
 }
 const uri = process.argv[2]
