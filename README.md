@@ -1,11 +1,6 @@
 # mqtt-connections
 
-Quick and easy way to run on Ubuntu:
-```M=mqtts://username:passwd@server-name.rmq.cloudamqp.com/
-git clone https://github.com/84codes/mqtt-connections.git
-cd mqtt-connections/
-sudo apt install npm
-npm install mqtt --save
-ulimit -n 100000
-node app.js $M 10000
-```
+This repository is no longer in use and archived on Mon Oct 26 08:30:28 UTC 2026, last commit was 7e49a2b.
+
+Last working version is available in the [archive](https://github.com/84codes/mqtt-connections/tree/archive) branch.
+
